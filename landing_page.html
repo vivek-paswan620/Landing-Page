@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sony Cameras - Capture Excellence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Glass effect utility class */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #007bff;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+                        url('https://www.sony.com/image/5d02da5eb4e4f84d157cea2925a9d6b9?fmt=pjpeg&wid=1200&hei=600') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #cccccc;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 123, 255, 0.3);
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .section h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .product-card:hover::before {
+            left: 100%;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .product-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .product-description {
+            color: #cccccc;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .product-button {
+            padding: 12px 30px;
+            background: transparent;
+            color: #007bff;
+            border: 2px solid #007bff;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .product-button:hover {
+            background: #007bff;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 60px 0 30px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #007bff;
+        }
+
+        .social-links {
+            margin: 30px 0;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin: 0 15px;
+            color: #cccccc;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #007bff;
+        }
+
+        .copyright {
+            color: #666;
+            margin-top: 20px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="#" class="logo">SONY</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#cameras">Cameras</a></li>
+                    <li><a href="#accessories">Accessories</a></li>
+                    <li><a href="#support">Support</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Capture Excellence</h1>
+            <p class="tagline">Professional cameras and lenses that bring your vision to life</p>
+            <a href="#cameras" class="cta-button">Explore Cameras</a>
+        </div>
+    </section>
+
+    <!-- Cameras Section -->
+    <section id="cameras" class="section">
+        <h2>Professional Cameras</h2>
+        <div class="product-grid">
+            <div class="product-card glass">
+                <img src="https://d1ncau8tqf99kp.cloudfront.net/converted/108562_original_local_1200x1050_v3_converted.webp" alt="Sony α7R V" class="product-image">
+                <h3 class="product-name">Sony α7R V</h3>
+                <p class="product-description">61MP full-frame mirrorless camera with advanced AI processing and 8K video recording capabilities.</p>
+                <a href="#" class="product-button">Shop Now</a>
+            </div>
+            <div class="product-card glass">
+                <img src="https://preview.redd.it/xynhuy6wpoof1.png?width=1080&crop=smart&auto=webp&s=df9306db4becfdf8c5ee157ff4dc222e26013f37" class="product-image">
+                <h3 class="product-name">Sony α7 IV</h3>
+                <p class="product-description">33MP full-frame hybrid camera perfect for both photography and 4K video content creation.</p>
+                <a href="#" class="product-button">Shop Now</a>
+            </div>
+            <div class="product-card glass">
+                <img src="https://preview.redd.it/ludsuy6wpoof1.png?width=640&crop=smart&auto=webp&s=8daa4f6d63ba6c2d87edba82d6099da779bacf9b" alt="Sony FX3" class="product-image">
+                <h3 class="product-name">Sony FX3</h3>
+                <p class="product-description">Full-frame Cinema Line camera designed for professional filmmakers and content creators.</p>
+                <a href="#" class="product-button">Shop Now</a>
+            </div>
+            <div class="product-card glass">
+                <img src="https://preview.redd.it/bftiiz6wpoof1.png?width=1080&crop=smart&auto=webp&s=d94069d09db3a98c9062b86dcf2070246cade855" alt="Sony α6600" class="product-image">
+                <h3 class="product-name">Sony α6600</h3>
+                <p class="product-description">APS-C mirrorless camera with exceptional battery life and advanced autofocus system.</p>
+                <a href="#" class="product-button">Shop Now</a>
+            </div>
+            <div class="product-card glass">
+                <img src="https://preview.redd.it/td9g5v6wpoof1.png?width=1080&crop=smart&auto=webp&s=b2331454559c73baa4a2523eb630e87c78b67e22" alt="Sony ZV-E10" class="product-image">
+                <h3 class="product-name">Sony ZV-E10</h3>
+                <p class="product-description">Compact APS-C camera optimized for vlogging with flip-out screen and advanced audio features.</p>
+                <a href="#" class="product-button">Shop Now</a>
+            </div>
+            <div class="product-card glass">
+                <img src="https://preview.redd.it/e83zty6wpoof1.png?width=640&crop=smart&auto=webp&s=14c3a60b6746bc247cdf27886d1274646f200967" alt="Sony ZV-E10" class="product-image">
+                <h3 class="product-name">Sony Zx-E50</h3>
+                <p class="product-description">Compact APS-C camera optimized for vlogging with flip-out screen and advanced audio features.</p>
+                <a href="#" class="product-button">Shop Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accessories Section -->
+    <section id="accessories" class="section">
+        <h2>Premium Accessories</h2>
+        <div class="product-grid">
+            <div class="product-card glass">
+                <img src=https://sony.scene7.com/is/image/sonyglobalsolutions/Primary_image_1200-2?$categorypdpnav$&fmt=png-alpha class="product-image">
+                <h3 class="product-name">FE 24-70mm f/2.8 GM</h3>
+                <p class="product-description">Professional standard zoom lens with constant f/2.8 aperture and exceptional sharpness.</p>
+                <a href="#" class="product-button">Shop Now</a>
+            </div>
+            <div class="product-card glass">
+                <img src=https://preview.redd.it/nukcpwuqroof1.png?width=320&crop=smart&auto=webp&s=a6a0be1b9dbf35a94bb60a7ea07c7a0c3c512695 class="product-image">
+                <h3 class="product-name">LCS-EBDM Camera Bag</h3>
+                <p class="product-description">Durable camera bag designed to protect your Sony camera and accessories during travel.</p>
+                <a href="#" class="product-button">Shop Now</a>
+            </div>
+            <div class="product-card glass">
+                <img src=https://www.sony.co.id/image/7befb9dcc9c80fddd4b81ce64ba3673e?fmt=png-alpha&wid=330 class="product-image">
+                <h3 class="product-name">VCT-SGR1 Shooting Grip</h3>
+                <p class="product-description">Versatile shooting grip with wireless remote control functionality for stable handheld shooting.</p>
+                <a href="#" class="product-button">Shop Now</a>
+            </div>
+           
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">About Sony</a>
+                <a href="#">Support</a>
+                <a href="#">Careers</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+            </div>
+            <div class="social-links">
+                <a href="#">📘</a>
+                <a href="#">📸</a>
+                <a href="#">🐦</a>
+                <a href="#">📺</a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Sony Corporation. All rights reserved.</p>
+                <p>Contact: 8579017989 | vivekpaswan28975@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
